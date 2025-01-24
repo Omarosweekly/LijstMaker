@@ -34,17 +34,17 @@ public class Bestand {
     }
 
     public void vragenLetters(){
+        checkBestaan();
         Scanner scan = new Scanner(System.in);
         System.out.println("Uit hoeveel letter bestaat de letter reeks?");
         int aantalLetters = scan.nextInt();
         System.out.println("Hoeveel letter reeksen zijn er nodig?");
         int aantalReeks = scan.nextInt();
         lijstAlfabet(aantalLetters, aantalReeks);
-        System.out.println(opslagBestand);
     }
 
     public void lijstCijfers(int min, int max) throws IOException {
-        checkBestaan();
+
         MakeUUID nieuwUUID = new MakeUUID();
         FileWriter opslag = new FileWriter(opslagBestand, true);
         int loop =0;
@@ -58,24 +58,15 @@ public class Bestand {
 
     public void lijstAlfabet(int aantalLetters, int aantalLabels) {
         MakeUUID nieuwUUID = new MakeUUID();
-        StringBuilder id = new StringBuilder();
+        MakeLetter letterReeks = new MakeLetter();
         int AantalKeren = 0;
         try {
             FileWriter opslag = new FileWriter(opslagBestand,true);
             while  (AantalKeren != aantalLabels) {
-                while (id.length() != aantalLetters) {
-                    Random random = new Random();
-                    int randomNumber = random.nextInt(65, 91);
-                    char letterA = 'A';
-                    char let = (char) (letterA + randomNumber);
-                    System.out.println("Deze letter is toegevoegd: "+ let);
-                    String letter = String.valueOf(let);
-                    id.append(letter);
-                }
                 String nieuw = nieuwUUID.aanvraag();
+                String id = letterReeks.reeks(aantalLetters);
                 opslag.write(nieuw + "::" + id + "\n");
                 AantalKeren++;
-                System.out.println(AantalKeren);
             }
             opslag.close();
             System.out.println(opslagBestand);
