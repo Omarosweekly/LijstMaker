@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.UUID;
 
-public class MakeUUID {
+public class MaakUUID {
     public String aanvraag(){
         Random uuid = new Random();
         long mostSigBits = uuid.nextLong();
